@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+b1 = Book.create!(
+    title: "Harry Potter and the Philosopher's Stone",
+    author: ["J.K. Rowling"],
+    genre: "non-fiction",
+    year: 1997,
+    series: "Harry Potter"
+)

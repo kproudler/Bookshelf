@@ -1,0 +1,15 @@
+<h1><%= @book.title %></h1>
+
+<table>
+    <tr>
+        <th>Attribute</th>
+        <th>Value</th>
+    </tr>
+    <% [:author, :genre, :series, :year].each do |attr_name| %>
+        <tr>
+            <td><%= attr_name %></td>
+            <td><%= @book.send(attr_name) %></td>
+        </tr>
+    <% end %>
+</table>
+

@@ -1,0 +1,52 @@
+<% action = (book.persisted? ? book_url(book) : books_url) %>
+<% method = (book.persisted? ? :patch : :post) %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+
+  <label for="book_title">Title</label>
+  <input
+    type="text"
+    name="book[title]"
+    id="book_title"
+    value="<%= book.title %>">
+    
+  <label for="book_series">Series</label>
+  <input
+    type="text"
+    name="book[series]"
+    id="book_series"
+    value="<%= book.series %>">
+
+  <label for="book_author">Author</label>
+  <input
+    type="text"
+    name="book[author]"
+    id="book_author"
+    value="<%= book.author %>">
+  <br>
+    
+    <label for="book_year">Year</label>
+    <input
+    type="number"
+    name="book[year]"
+    id="book_year"
+    value="<%= book.year %>">
+    <br>
+
+  <label for="book_genre">Genre</label>
+  <select name="book[genre]" id="book_genre">
+  <option disabled selected>-- select a genre --</option>
+    <% Book::BOOK_GENRE.each do |genre| %>
+      <option
+        <%= book.genre == genre ? "selected" : "" %>
+        value="<%= genre %>">
+        <%= genre.upcase %>
+      </option>
+    <% end %>
+  </select>
+  <br>
+
+  <% submit_text = (book.persisted? ? 'Update' : 'Create') + ' book!' %>
+  <input type="submit" value="<%= submit_text %>">
+</form>
