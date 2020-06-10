@@ -8,7 +8,7 @@
 
 b1 = Book.create!(
     title: "Harry Potter and the Philosopher's Stone",
-    author: ["J.K. Rowling"],
+    author: "J.K. Rowling",
     genre: "non-fiction",
     year: 1997,
     series: "Harry Potter"
