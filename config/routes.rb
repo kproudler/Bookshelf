@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  resources :books
+  resources :books, only: [:new, :edit, :create, :index, :show, :update]
   resources :users
-  resources :session, only: [:new, :create, :destroy]
+  resource :session, only: [:new, :create, :destroy]
 
 end

@@ -7,7 +7,10 @@ class SessionsController < ApplicationController
         )
 
         if user.nil?
-            render json: "Credentials were wrong"
+            # render json: "Credentials were wrong"
+            # render :new
+            
+            redirect_to new_session_url
         else
             login!(user)
             redirect_to user_url(user)
@@ -15,11 +18,12 @@ class SessionsController < ApplicationController
     end
 
     def new
+        render :new
     end
 
     def destroy
         logout!
-        redirect_to new_session_url
+        redirect_to books_url
     end
 
 end
