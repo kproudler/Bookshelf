@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
         if @user.save
             shelf = @user.create_shelf!
-            @user.update_attributes(:shelf_id => shelf.id)
+            @user.update(:shelf_id => shelf.id)
             login!(@user)
             redirect_to user_url(@user)
         else

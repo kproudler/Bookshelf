@@ -13,3 +13,10 @@
     <% end %>
 </table>
 
+
+
+    <form action="<%= book_url(@book) %>" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <input type="hidden" name="book[shelf_id]" value="<%= current_user.shelf.id %>">
+        <input type="submit" value="Add to my shelf!">
+    </form>
