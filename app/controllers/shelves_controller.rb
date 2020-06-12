@@ -10,6 +10,7 @@ class ShelvesController < ApplicationController
   # GET /shelves/1
   # GET /shelves/1.json
   def show
+    render "users/show.html.erb"
   end
 
   # GET /shelves/new
@@ -26,15 +27,16 @@ class ShelvesController < ApplicationController
   def create
     @shelf = Shelf.new(shelf_params)
 
-    respond_to do |format|
-      if @shelf.save
-        format.html { redirect_to @shelf, notice: 'Shelf was successfully created.' }
-        format.json { render :show, status: :created, location: @shelf }
-      else
-        format.html { render :new }
-        format.json { render json: @shelf.errors, status: :unprocessable_entity }
-      end
-    end
+
+    # respond_to do |format|
+    #   if @shelf.save
+    #     format.html { redirect_to @shelf, notice: 'Shelf was successfully created.' }
+    #     format.json { render :show, status: :created, location: @shelf }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @shelf.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /shelves/1
@@ -69,6 +71,6 @@ class ShelvesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def shelf_params
-      params.fetch(:shelf, {})
+      params.require(:user).permit(:user_id)
     end
 end

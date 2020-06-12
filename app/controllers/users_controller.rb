@@ -4,8 +4,10 @@ class UsersController < ApplicationController
 
     def create
         @user = User.new(user_params)
-        
+
         if @user.save
+            shelf = @user.create_shelf!
+            @user.update_attributes(:shelf_id => shelf.id)
             login!(@user)
             redirect_to user_url(@user)
         else
