@@ -9,9 +9,10 @@
 
   </head>
 
-  <a href="<%= books_url %>">Books</a>
+<div class='main-content'>
+  <h1 class='main-logo'><a href="<%= books_url %>">Books</a></h1>
 
-  <% if current_user.nil? %>
+  <h3 class='sign-in'><% if current_user.nil? %>
     <a href="<%= new_session_url %>">Sign in</a>
     <a href="<%= new_user_url %>">Sign up</a>
   <% else %>
@@ -26,7 +27,8 @@
       </li>
     </ul>
   <% end %>
-
+  </h3>
+</div>
 
   <body>
     <%= yield %>
