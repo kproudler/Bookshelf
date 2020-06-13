@@ -37,9 +37,6 @@ class User < ApplicationRecord
         user.is_password?(password) ? user : nil
     end
 
-    def generate_shelf
-    end
-
     private
 
     def ensure_session_token

@@ -13,10 +13,15 @@
     <% end %>
 </table>
 
-
+<% shelf_array = @book.shelf_id << current_user.shelf_id %>
 
     <form action="<%= book_url(@book) %>" method="post">
         <input type="hidden" name="_method" value="patch">
-        <input type="hidden" name="book[shelf_id]" value="<%= current_user.shelf.id %>">
+        <input type="hidden" name="book[shelf_id]" value="<%= shelf_array %>">
         <input type="submit" value="Add to my shelf!">
+    </form>
+
+    <form action="<%= edit_book_url(@book) %>" method="post">
+        <input type="hidden" name="_method" value="get">
+        <input type="submit" value="Edit Book Details">
     </form>
