@@ -10,7 +10,9 @@ class ShelvesController < ApplicationController
   # GET /shelves/1
   # GET /shelves/1.json
   def show
-    render "users/show.html.erb"
+    @shelf = Shelf.find(params[:id])
+    @books = Book.all
+    render :show
   end
 
   # GET /shelves/new
@@ -20,6 +22,9 @@ class ShelvesController < ApplicationController
 
   # GET /shelves/1/edit
   def edit
+    @shelf = Shelf.find(params[:id])
+    @books = Book.all
+    render :edit
   end
 
   # POST /shelves
@@ -42,15 +47,38 @@ class ShelvesController < ApplicationController
   # PATCH/PUT /shelves/1
   # PATCH/PUT /shelves/1.json
   def update
-    respond_to do |format|
-      if @shelf.update(shelf_params)
-        format.html { redirect_to @shelf, notice: 'Shelf was successfully updated.' }
-        format.json { render :show, status: :ok, location: @shelf }
-      else
-        format.html { render :edit }
-        format.json { render json: @shelf.errors, status: :unprocessable_entity }
-      end
+    
+    @shelf = Shelf.find(params[:id])
+    @book = Book.find(book_params[:id])
+
+    if @shelf.book_id.include?(@book.id)
+      flash.now[:errors] = @shelf.errors.full_messages
+      redirect_to shelf_url(@shelf)
+    elsif @shelf.update(:book_id => shelf_update)
+      redirect_to shelf_url(@shelf)
+    else
+      flash.now[:errors] = @shelf.errors.full_messages
+      render book_url(@book)
     end
+
+    
+    
+    # if @shelf.update(:book_id => shelf_update)
+    #   redirect_to shelf_url(@shelf)
+    # else
+    #   flash.now[:errors] = @shelf.errors.full_messages
+    #   render book_url(@book)
+    # end
+    
+    # respond_to do |format|
+    #   if @shelf.update(shelf_params)
+    #     format.html { redirect_to @shelf, notice: 'Shelf was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @shelf }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @shelf.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /shelves/1
@@ -71,6 +99,16 @@ class ShelvesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def shelf_params
-      params.require(:user).permit(:user_id)
+      params.require(:user).permit(:user_id, :book_id)
+    end
+
+    def book_params
+      params.require(:book).permit(:id)
+    end
+
+    def shelf_update
+      @book = Book.find(book_params[:id])
+      @shelf = Shelf.find(params[:id])
+      @shelf.book_id << @book.id
     end
 end

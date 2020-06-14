@@ -1,6 +1,13 @@
 <h1>Editing Shelf</h1>
 
+<ul>
+    <% @books.each do |book| %>
+        <% if @shelf.book_id.include?(book.id) %>
+            <li><a href="<%= book_url(book) %>"><%= book.title %></a></li>
+        <% end %>
+    <% end %>
+</ul>
+
 <%= render 'form', shelf: @shelf %>
 
-<%= link_to 'Show', @shelf %> |
-<%= link_to 'Back', shelves_path %>
+<%= link_to 'Show Shelf', @shelf %> 

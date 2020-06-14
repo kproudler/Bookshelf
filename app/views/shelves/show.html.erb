@@ -1,4 +1,13 @@
-<p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_shelf_path(@shelf) %> |
-<%= link_to 'Back', shelves_path %>
+
+
+<h3><%= @shelf.name %></h3>
+<ul>
+    <% @books.each do |book| %>
+        <% if @shelf.book_id.include?(book.id) %>
+            <li><a href="<%= book_url(book) %>"><%= book.title %></a></li>
+        <% end %>
+    <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_shelf_path(@shelf) %>
