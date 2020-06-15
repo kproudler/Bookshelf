@@ -2,6 +2,6 @@
 <p>Hello <%= current_user.username %>!</p>
 
 <ul>
-    <header><%= current_user.shelf.name %></header>
-    <li>put list of books here</li>
+    
+    <header><a href="<%= shelf_url(current_user.shelf) %>"><%= current_user.shelf.name %></a></header>
 </ul>
